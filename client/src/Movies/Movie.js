@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import MovieCard from "./MovieCard";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import MovieCard from './MovieCard';
 
 function Movie({ addToSavedList }) {
   const [movie, setMovie] = useState(null);
@@ -32,6 +32,9 @@ function Movie({ addToSavedList }) {
 
       <div className="save-button" onClick={saveMovie}>
         Save
+      </div>
+      <div className="save-button" onClick={}>
+        Edit
       </div>
     </div>
   );
