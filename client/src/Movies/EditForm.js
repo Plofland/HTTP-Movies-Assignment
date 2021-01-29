@@ -19,14 +19,14 @@ export default function EditForm(props) {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
       .then((res) => {
-        // console.log(res);
-        // const starsString = res.data.stars.join(', ');
-        // const movieToEdit = {
-        //   ...res.data,
-        //   stars: starsString
-        // }
-        // setFormValues(movieToEdit);
-        setFormValues(res.data);
+        console.log(res);
+        const starsString = res.data.stars.join(', ');
+        const movieToEdit = {
+          ...res.data,
+          stars: starsString
+        };
+        setFormValues(movieToEdit);
+        // setFormValues(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -39,14 +39,17 @@ export default function EditForm(props) {
       ...formValues,
       [name]: value
     });
-    // console.log(formValues);
+    console.log(formValues);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:5000/api/movies/${id}`, formValues)
+      .put(`http://localhost:5000/api/movies/${id}`, {
+        ...formValues,
+        stars: formValues.stars.split(', ')
+      })
       .then((res) => {
         props.updateMovies(
           props.movieList.map((movie) => {
@@ -57,7 +60,7 @@ export default function EditForm(props) {
             }
           })
         );
-        push(`/movie/${id}`);
+        push(`/`);
       })
       .catch((err) => {
         console.log(err);
